@@ -117,6 +117,32 @@
             filter: brightness(0) invert(1);
         }
 
+        /* FIX: permitir tooltips con SVG */
+        .icon-btn svg {
+            pointer-events: none;
+        }
+
+        .icon-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -32px;
+            background: rgba(0,0,0,0.75);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+            white-space: nowrap;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .icon-btn:hover::after {
+            opacity: 1;
+            transform: translateY(4px);
+        }
+
         .server-box {
             margin-top: 40px;
             border-radius: 16px;
@@ -180,7 +206,6 @@
         .song-title {
             font-weight: 600;
             font-size: 1rem;
-            margin-bottom: 2px;
             text-align: center;
         }
 
@@ -202,15 +227,13 @@
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0;
-            margin: 0;
             width: 32px;
             height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.25s;
             opacity: 0.85;
+            transition: 0.25s;
         }
 
         .audio-btn:hover {
@@ -260,14 +283,12 @@
             justify-content: space-between;
             font-size: 0.7rem;
             opacity: 0.7;
-            font-weight: 500;
         }
 
         #startScreen {
             position: fixed;
             inset: 0;
             backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             background: rgba(0,0,0,0.65);
             z-index: 9999;
             display: flex;
@@ -277,7 +298,6 @@
             font-weight: 700;
             color: white;
             cursor: pointer;
-            text-shadow: 0 0 12px rgba(255,255,255,0.8);
         }
     </style>
 </head>
@@ -416,8 +436,7 @@
             startScreen.style.display = "none";
             audio.play().then(() => {
                 audioReady = true;
-            }).catch(() => {
-                audioReady = false;
+                playIcon.innerHTML = pauseSVG;
             });
         });
 
@@ -429,6 +448,7 @@
             if (!audioReady) {
                 audio.play().then(() => {
                     audioReady = true;
+                    playIcon.innerHTML = pauseSVG;
                 });
                 return;
             }
