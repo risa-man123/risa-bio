@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Bio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -3;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: -2;
+        }
+
+        .card, .server-box, .extra-box {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(20, 20, 20, 0.55);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 0 12px rgba(255,255,255,0.35);
+        }
+
+        .card {
+            padding: 30px;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 18px;
+            text-align: center;
+            animation: fadeIn 1.2s ease forwards;
+            opacity: 0;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+            object-fit: cover;
+            box-shadow: 0 0 12px rgba(0,255,255,0.55);
+        }
+
+        h1 { font-size: 1.9rem; margin-bottom: 6px; }
+
+        .admin-tag {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        p { opacity: 0.8; margin-bottom: 25px; }
+
+        .icon-row {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+        .icon-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: rgba(0, 255, 255, 0.22);
+            border: 1px solid rgba(255,255,255,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: 0.25s;
+            backdrop-filter: blur(6px);
+        }
+
+        .icon-btn:hover {
+            background: rgba(0, 255, 255, 0.38);
+            transform: translateY(-2px);
+        }
+
+        .icon-btn img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        .server-box {
+            margin-top: 40px;
+            border-radius: 16px;
+            padding: 18px;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .server-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+
+        .server-info { flex: 1; }
+
+        .server-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .server-stats {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-bottom: 10px;
+        }
+
+        .join-btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background: rgba(0,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.25s;
+            white-space: nowrap;
+        }
+
+        .join-btn:hover { background: rgba(0,255,255,0.45); }
+
+        .extra-box {
+            margin-top: 25px;
+            padding: 18px 20px;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .song-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 2px;
+            text-align: center;
+        }
+
+        .audio-slider {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 26px;
+        }
+
+        .audio-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.25s;
+            opacity: 0.85;
+        }
+
+        .audio-btn:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .audio-btn svg {
+            width: 26px;
+            height: 26px;
+            stroke: white;
+        }
+
+        .progress-container {
+            position: relative;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            width: 0%;
+        }
+
+        .progress-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white, 0 0 20px rgba(255,255,255,0.5);
+            pointer-events: none;
+        }
+
+        .time-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        #startScreen {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            background: rgba(0,0,0,0.65);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            text-shadow: 0 0 12px rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="startScreen">Click anywhere to load</div>
+
+    <video autoplay muted loop playsinline id="bg">
+        <source src="https://files.catbox.moe/gbojd6.mp4" type="video/mp4">
+    </video>
+
+    <audio id="bgAudio">
+        <source src="https://files.catbox.moe/5eu466.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="card">
+        <img src="https://files.catbox.moe/v3dwty.jpg" class="avatar">
+
+        <h1>Risa_Man123</h1>
+
+        <div class="admin-tag"><b>𝙏𝘼𝙊 • SQD ADMIN</b></div>
+
+        <p>I'm Risa, nice to meet you!</p>
+
+        <div class="icon-row">
+            <a class="icon-btn" href="https://discord.com/users/767576131528032278" target="_blank" data-tooltip="Discord">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg">
+            </a>
+
+            <a class="icon-btn" href="https://www.tiktok.com/@risaman123" target="_blank" data-tooltip="TikTok">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">
+            </a>
+
+            <a class="icon-btn" href="https://t.me/Risa_Man123" target="_blank" data-tooltip="Telegram">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">
+            </a>
+        </div>
+    </div>
+
+    <div class="server-box">
+        <img class="server-icon" src="https://cdn.discordapp.com/icons/1249197403068956712/4be337fb2a8c6dcb7410631d83eba9a8.png">
+
+        <div class="server-info">
+            <div class="server-title">𝙏𝘼𝙊 • SQD-COMMUNITY</div>
+            <div class="server-stats" id="serverStats">Loading...</div>
+            <a class="join-btn" href="https://discord.gg/nEytHzam7t" target="_blank">Join Server →</a>
+        </div>
+    </div>
+
+    <div class="extra-box">
+        <div class="song-title">Fly Away - TheFatRat</div>
+
+        <div class="audio-slider">
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-thumb" id="progressThumb"></div>
+            </div>
+
+            <div class="time-row">
+                <span id="currentTime">0:00</span>
+                <span id="totalTime">0:00</span>
+            </div>
+
+            <div class="controls-row">
+
+                <!-- Retroceder -->
+                <button class="audio-btn" id="rewindBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="11 19 2 12 11 5"></polyline>
+                        <line x1="22" y1="12" x2="2" y2="12"></line>
+                    </svg>
+                </button>
+
+                <!-- Play/Pause -->
+                <button class="audio-btn" id="playPauseBtn">
+                    <span id="playIcon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                        </svg>
+                    </span>
+                </button>
+
+                <!-- Adelantar -->
+                <button class="audio-btn" id="forwardBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="13 5 22 12 13 19"></polyline>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        fetch("https://discord.com/api/guilds/1249197403068956712/widget.json")
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById("serverStats").textContent =
+                    data.presence_count + " Online • 500+ Members";
+            });
+
+        const startScreen = document.getElementById("startScreen");
+        const audio = document.getElementById("bgAudio");
+        const playPauseBtn = document.getElementById("playPauseBtn");
+        const playIcon = document.getElementById("playIcon");
+        const rewindBtn = document.getElementById("rewindBtn");
+        const forwardBtn = document.getElementById("forwardBtn");
+        const progressContainer = document.getElementById("progressContainer");
+        const progressBar = document.getElementById("progressBar");
+        const progressThumb = document.getElementById("progressThumb");
+        const currentTimeEl = document.getElementById("currentTime");
+        const totalTimeEl = document.getElementById("totalTime");
+
+        let audioReady = false;
+
+        const playSVG = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="6 4 20 12 6 20 6 4"></polygon>
+        </svg>`;
+
+        const pauseSVG = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="4" x2="8" y2="20"></line>
+            <line x1="16" y1="4" x2="16" y2="20"></line>
+        </svg>`;
+
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = Math.floor(sec % 60).toString().padStart(2, "0");
+            return `${m}:${s}`;
+        }
+
+        startScreen.addEventListener("click", () => {
+            startScreen.style.display = "none";
+            audio.play().then(() => {
+                audioReady = true;
+            }).catch(() => {
+                audioReady = false;
+            });
+        });
+
+        audio.addEventListener("loadedmetadata", () => {
+            totalTimeEl.textContent = formatTime(audio.duration);
+        });
+
+        playPauseBtn.addEventListener("click", () => {
+            if (!audioReady) {
+                audio.play().then(() => {
+                    audioReady = true;
+                });
+                return;
+            }
+
+            if (audio.paused) {
+                audio.play();
+                playIcon.innerHTML = pauseSVG;
+            } else {
+                audio.pause();
+                playIcon.innerHTML = playSVG;
+            }
+        });
+
+        rewindBtn.addEventListener("click", () => {
+            audio.currentTime = Math.max(0, audio.currentTime - 5);
+        });
+
+        forwardBtn.addEventListener("click", () => {
+            audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
+        });
+
+        audio.addEventListener("timeupdate", () => {
+            if (!isNaN(audio.duration)) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = progress + "%";
+                progressThumb.style.left = progress + "%";
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        progressContainer.addEventListener("click", (e) => {
+            if (!isNaN(audio.duration)) {
+                const rect = progressContainer.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percent = clickX / rect.width;
+                audio.currentTime = percent * audio.duration;
+            }
+        });
+    </script>
+
+</body>
+</html>
