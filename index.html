@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Bio</title>
-
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: "Inter", sans-serif;
             min-height: 100vh;
@@ -24,7 +22,6 @@
             position: relative;
             overflow-x: hidden;
         }
-
         /* Fondo con video y overlay mejorado */
         #bg {
             position: fixed;
@@ -37,12 +34,10 @@
             filter: brightness(0.85) saturate(1.2);
             animation: slowZoom 30s ease-in-out infinite alternate;
         }
-
         @keyframes slowZoom {
             0% { transform: scale(1); }
             100% { transform: scale(1.05); }
         }
-
         body::before {
             content: "";
             position: fixed;
@@ -50,8 +45,7 @@
             background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
             z-index: -2;
         }
-
-        /* Efecto de partículas flotantes */
+        /* Efecto de partículas flotantes mejorado */
         body::after {
             content: "";
             position: fixed;
@@ -63,26 +57,26 @@
                 radial-gradient(1px 1px at 80% 10%, white, transparent),
                 radial-gradient(2px 2px at 90% 60%, white, transparent),
                 radial-gradient(1px 1px at 33% 80%, white, transparent),
-                radial-gradient(1px 1px at 15% 90%, white, transparent);
+                radial-gradient(1px 1px at 15% 90%, white, transparent),
+                radial-gradient(2px 2px at 40% 20%, rgba(0,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 70% 40%, rgba(0,255,255,0.5), transparent);
             background-size: 200% 200%;
             background-position: 0% 0%;
             opacity: 0.3;
             z-index: -1;
             animation: particles 20s ease-in-out infinite;
         }
-
         @keyframes particles {
             0%, 100% { 
-                background-position: 0% 0%, 100% 100%, 50% 50%, 100% 0%, 0% 100%, 75% 25%, 25% 75%; 
+                background-position: 0% 0%, 100% 100%, 50% 50%, 100% 0%, 0% 100%, 75% 25%, 25% 75%, 20% 80%, 80% 20%; 
                 opacity: 0.3;
             }
             50% { 
-                background-position: 100% 100%, 0% 0%, 75% 25%, 25% 75%, 100% 0%, 50% 50%, 0% 100%; 
+                background-position: 100% 100%, 0% 0%, 75% 25%, 25% 75%, 100% 0%, 50% 50%, 0% 100%, 60% 40%, 40% 60%; 
                 opacity: 0.5;
             }
         }
-
-        .card, .server-box, .extra-box, .stats-grid, .bio-extended {
+        .card, .server-box, .extra-box, .stats-grid, .bio-extended, .achievements-box {
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             background: rgba(20, 20, 20, 0.6);
@@ -94,10 +88,9 @@
             position: relative;
             overflow: hidden;
         }
-
         /* Efecto de brillo en los bordes */
         .card::before, .server-box::before, .extra-box::before, 
-        .stats-grid::before, .bio-extended::before {
+        .stats-grid::before, .bio-extended::before, .achievements-box::before {
             content: "";
             position: absolute;
             top: -50%;
@@ -113,12 +106,10 @@
             transform: rotate(45deg);
             animation: borderGlow 6s linear infinite;
         }
-
         @keyframes borderGlow {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
-
         .card {
             padding: 35px;
             width: 100%;
@@ -129,16 +120,13 @@
             opacity: 0;
             margin-top: 20px;
         }
-
         @keyframes fadeIn { 
             to { opacity: 1; } 
         }
-
         @keyframes floatCard {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
         }
-
         /* Avatar mejorado con efectos */
         .avatar {
             width: 120px;
@@ -155,7 +143,6 @@
             position: relative;
             z-index: 1;
         }
-
         @keyframes avatarPulse {
             0%, 100% { 
                 box-shadow: 
@@ -170,14 +157,12 @@
                     inset 0 0 30px rgba(0,255,255,0.2);
             }
         }
-
         /* Anillo decorativo alrededor del avatar */
         .avatar-container {
             position: relative;
             display: inline-block;
             margin-bottom: 8px;
         }
-
         .avatar-ring {
             position: absolute;
             top: 50%;
@@ -190,12 +175,22 @@
             border-top-color: rgba(0, 255, 255, 0.6);
             animation: rotateRing 3s linear infinite;
         }
-
+        .avatar-ring-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 155px;
+            height: 155px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-bottom-color: rgba(0, 255, 255, 0.4);
+            animation: rotateRing 4s linear infinite reverse;
+        }
         @keyframes rotateRing {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
-
         h1 { 
             font-size: 2.1rem; 
             margin-bottom: 8px;
@@ -205,12 +200,10 @@
             background-clip: text;
             animation: textShine 3s ease-in-out infinite;
         }
-
         @keyframes textShine {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.85; }
         }
-
         .admin-tag {
             font-weight: 700;
             font-size: 1rem;
@@ -224,19 +217,16 @@
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
             animation: tagGlow 2s ease-in-out infinite;
         }
-
         @keyframes tagGlow {
             0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); }
             50% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }
         }
-
         p { 
             opacity: 0.85; 
             margin-bottom: 20px;
             font-size: 1rem;
             line-height: 1.6;
         }
-
         /* Sección bio extendida */
         .bio-extended {
             margin-top: 20px;
@@ -247,7 +237,6 @@
             animation: slideUp 1.4s ease forwards;
             opacity: 0;
         }
-
         @keyframes slideUp {
             from { 
                 opacity: 0; 
@@ -258,7 +247,6 @@
                 transform: translateY(0); 
             }
         }
-
         .bio-title {
             font-size: 1.3rem;
             font-weight: 700;
@@ -267,7 +255,6 @@
             color: #00ffff;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
-
         .bio-text {
             font-size: 0.95rem;
             line-height: 1.7;
@@ -275,7 +262,6 @@
             text-align: center;
             margin-bottom: 15px;
         }
-
         .interests {
             display: flex;
             flex-wrap: wrap;
@@ -283,7 +269,6 @@
             justify-content: center;
             margin-top: 15px;
         }
-
         .interest-tag {
             padding: 6px 14px;
             background: rgba(0, 255, 255, 0.12);
@@ -291,14 +276,66 @@
             border-radius: 16px;
             font-size: 0.85rem;
             transition: all 0.3s ease;
+            cursor: default;
         }
-
         .interest-tag:hover {
             background: rgba(0, 255, 255, 0.25);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
         }
-
+        /* Hobbies Box */
+        .achievements-box {
+            margin-top: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 18px;
+            animation: slideUp 1.45s ease forwards;
+            opacity: 0;
+            animation-delay: 0.1s;
+        }
+        .achievement-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .achievement-item {
+            padding: 12px;
+            background: rgba(0, 255, 255, 0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .achievement-item:hover {
+            background: rgba(0, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.25);
+        }
+        .achievement-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
+        }
+        .achievement-icon img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
+        }
+        .achievement-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
         /* Grid de estadísticas */
         .stats-grid {
             margin-top: 20px;
@@ -313,7 +350,6 @@
             opacity: 0;
             animation-delay: 0.2s;
         }
-
         .stat-item {
             text-align: center;
             padding: 15px;
@@ -322,13 +358,11 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             transition: all 0.3s ease;
         }
-
         .stat-item:hover {
             background: rgba(0, 255, 255, 0.15);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 255, 255, 0.25);
         }
-
         .stat-number {
             font-size: 1.8rem;
             font-weight: 700;
@@ -337,19 +371,17 @@
             display: block;
             margin-bottom: 5px;
         }
-
         .stat-label {
             font-size: 0.8rem;
             opacity: 0.8;
         }
-
         .icon-row {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             margin-bottom: 10px;
+            flex-wrap: wrap;
         }
-
         .icon-btn {
             width: 50px;
             height: 50px;
@@ -363,28 +395,23 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(8px);
         }
-
         .icon-btn:hover {
             background: rgba(0, 255, 255, 0.35);
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
         }
-
         .icon-btn img {
             width: 26px;
             height: 26px;
             filter: brightness(0) invert(1);
             transition: transform 0.3s ease;
         }
-
         .icon-btn:hover img {
             transform: scale(1.1);
         }
-
         .icon-btn svg {
             pointer-events: none;
         }
-
         .icon-btn::after {
             content: attr(data-tooltip);
             position: absolute;
@@ -401,12 +428,10 @@
             border: 1px solid rgba(0, 255, 255, 0.5);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-
         .icon-btn:hover::after {
             opacity: 1;
             transform: translateY(4px);
         }
-
         .server-box {
             margin-top: 30px;
             border-radius: 18px;
@@ -421,7 +446,6 @@
             opacity: 0;
             animation-delay: 0.3s;
         }
-
         .server-icon {
             width: 65px;
             height: 65px;
@@ -431,16 +455,13 @@
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
             transition: all 0.3s ease;
         }
-
         .server-box:hover .server-icon {
             transform: rotate(5deg) scale(1.05);
             box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
         }
-
         .server-info { 
             flex: 1; 
         }
-
         .server-title {
             font-size: 1.15rem;
             font-weight: 700;
@@ -448,13 +469,11 @@
             color: #00ffff;
             text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
         }
-
         .server-stats {
             font-size: 0.88rem;
             opacity: 0.85;
             margin-bottom: 12px;
         }
-
         .join-btn {
             display: inline-block;
             padding: 11px 20px;
@@ -468,13 +487,11 @@
             white-space: nowrap;
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
         }
-
         .join-btn:hover { 
             background: rgba(0,255,255,0.45);
             transform: translateY(-2px);
             box-shadow: 0 6px 25px rgba(0, 255, 255, 0.4);
         }
-
         .extra-box {
             margin-top: 25px;
             padding: 22px 24px;
@@ -488,7 +505,6 @@
             opacity: 0;
             animation-delay: 0.4s;
         }
-
         .song-title {
             font-weight: 700;
             font-size: 1.1rem;
@@ -497,28 +513,24 @@
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
             margin-bottom: 5px;
         }
-
         .song-artist {
             font-size: 0.85rem;
             text-align: center;
             opacity: 0.7;
             margin-bottom: 10px;
         }
-
         .audio-slider {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
-
         .controls-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 30px;
         }
-
         .audio-btn {
             background: rgba(0, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -532,32 +544,27 @@
             opacity: 0.9;
             transition: all 0.3s ease;
         }
-
         .audio-btn:hover {
             opacity: 1;
             transform: scale(1.15);
             background: rgba(0, 255, 255, 0.25);
             box-shadow: 0 4px 20px rgba(0, 255, 255, 0.4);
         }
-
         .audio-btn svg {
             width: 22px;
             height: 22px;
             stroke: white;
         }
-
         #playPauseBtn {
             width: 50px;
             height: 50px;
             background: rgba(0, 255, 255, 0.25);
             border: 2px solid rgba(255, 255, 255, 0.4);
         }
-
         #playPauseBtn:hover {
             background: rgba(0, 255, 255, 0.45);
             box-shadow: 0 6px 30px rgba(0, 255, 255, 0.6);
         }
-
         .progress-container {
             position: relative;
             width: 100%;
@@ -567,7 +574,6 @@
             cursor: pointer;
             overflow: hidden;
         }
-
         .progress-container::before {
             content: "";
             position: absolute;
@@ -578,12 +584,10 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             animation: progressShine 2s linear infinite;
         }
-
         @keyframes progressShine {
             0% { left: -100%; }
             100% { left: 100%; }
         }
-
         .progress-bar {
             position: absolute;
             top: 0;
@@ -595,7 +599,6 @@
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
             transition: width 0.1s linear;
         }
-
         .progress-thumb {
             position: absolute;
             top: 50%;
@@ -610,7 +613,6 @@
             pointer-events: none;
             transition: all 0.3s ease;
         }
-
         .progress-container:hover .progress-thumb {
             width: 16px;
             height: 16px;
@@ -618,7 +620,6 @@
                 0 0 20px rgba(0, 255, 255, 1),
                 0 0 40px rgba(0, 255, 255, 0.6);
         }
-
         .time-row {
             display: flex;
             justify-content: space-between;
@@ -626,7 +627,6 @@
             opacity: 0.75;
             padding: 0 5px;
         }
-
         /* Botón de volumen */
         .volume-container {
             display: flex;
@@ -635,7 +635,6 @@
             gap: 10px;
             margin-top: 10px;
         }
-
         .volume-btn {
             background: rgba(0, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -648,18 +647,15 @@
             justify-content: center;
             transition: all 0.3s ease;
         }
-
         .volume-btn:hover {
             background: rgba(0, 255, 255, 0.25);
             transform: scale(1.1);
         }
-
         .volume-btn svg {
             width: 20px;
             height: 20px;
             stroke: white;
         }
-
         .volume-slider {
             width: 120px;
             height: 4px;
@@ -668,7 +664,6 @@
             position: relative;
             cursor: pointer;
         }
-
         .volume-fill {
             position: absolute;
             top: 0;
@@ -679,7 +674,6 @@
             width: 70%;
             box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
         }
-
         #startScreen {
             position: fixed;
             inset: 0;
@@ -697,7 +691,6 @@
             cursor: pointer;
             transition: opacity 0.5s ease;
         }
-
         .start-icon {
             width: 80px;
             height: 80px;
@@ -708,7 +701,6 @@
             justify-content: center;
             animation: pulseStart 2s ease-in-out infinite;
         }
-
         @keyframes pulseStart {
             0%, 100% { 
                 transform: scale(1);
@@ -719,13 +711,11 @@
                 box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
             }
         }
-
         .start-icon svg {
             width: 40px;
             height: 40px;
             fill: white;
         }
-
         /* Footer decorativo */
         .footer {
             margin-top: 40px;
@@ -737,7 +727,6 @@
             opacity: 0;
             animation-delay: 0.8s;
         }
-
         .footer-divider {
             width: 60px;
             height: 2px;
@@ -745,7 +734,6 @@
             margin: 15px auto;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
-
         /* Responsive */
         @media (max-width: 480px) {
             h1 { font-size: 1.7rem; }
@@ -753,12 +741,14 @@
             .stats-grid { grid-template-columns: 1fr; }
             .stat-item { padding: 12px; }
             .controls-row { gap: 20px; }
+            .achievement-grid { 
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .icon-row { gap: 12px; }
         }
     </style>
 </head>
-
 <body>
-
     <div id="startScreen">
         <div class="start-icon">
             <svg viewBox="0 0 24 24">
@@ -767,60 +757,87 @@
         </div>
         Click anywhere to start
     </div>
-
     <video autoplay muted loop playsinline id="bg">
         <source src="https://files.catbox.moe/gbojd6.mp4" type="video/mp4">
     </video>
-
     <audio id="bgAudio">
         <source src="https://files.catbox.moe/5eu466.mp3" type="audio/mpeg">
     </audio>
-
     <div class="card">
         <div class="avatar-container">
             <div class="avatar-ring"></div>
+            <div class="avatar-ring-2"></div>
             <img src="https://files.catbox.moe/v3dwty.jpg" class="avatar">
         </div>
-
         <h1>Risa_Man123</h1>
-
         <div class="admin-tag"><b>𝙏𝘼𝙊 • SQD ADMIN</b></div>
-
         <p>I'm Risa, nice to meet you!<br>Welcome to my corner of the internet ✨</p>
-
         <div class="icon-row">
             <a class="icon-btn" href="https://discord.com/users/767576131528032278" target="_blank" data-tooltip="Discord">
                 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg">
             </a>
-
+            <a class="icon-btn" href="https://www.instagram.com/risa_man123/" target="_blank" data-tooltip="Instagram">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg">
+            </a>
             <a class="icon-btn" href="https://www.tiktok.com/@risaman123" target="_blank" data-tooltip="TikTok">
                 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg">
             </a>
-
             <a class="icon-btn" href="https://t.me/Risa_Man123" target="_blank" data-tooltip="Telegram">
                 <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg">
             </a>
         </div>
     </div>
-
     <div class="bio-extended">
         <div class="bio-title">About Me</div>
         <div class="bio-text">
-            Community builder, content creator, and tech enthusiast. 
-            I love connecting people and creating amazing experiences in the digital world.
+            I'm Risa. I'm a tech enthusiast and I love doing things online. I'm very curious and I always want to learning anything I am interested in.
         </div>
         <div class="interests">
-            <span class="interest-tag">Gaming</span>
-            <span class="interest-tag">Music</span>
-            <span class="interest-tag">Tech</span>
-            <span class="interest-tag">Design</span>
-            <span class="interest-tag">Community</span>
+            <span class="interest-tag">🎮 Gaming</span>
+            <span class="interest-tag">🎵 Music</span>
+            <span class="interest-tag">💻 Tech</span>
+            <span class="interest-tag">🎨 Design</span>
+            <span class="interest-tag">👥 Community</span>
         </div>
     </div>
-
+    <div class="achievements-box">
+        <div class="achievement-title">Hobbies</div>
+        <div class="achievement-grid">
+            <div class="achievement-item">
+                <span class="achievement-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" alt="After Effects">
+                </span>
+                <span class="achievement-label">Editing</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                </span>
+                <span class="achievement-label">Programming</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="Chess">
+                </span>
+                <span class="achievement-label">Chess</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">📚</span>
+                <span class="achievement-label">Reading</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">🎮</span>
+                <span class="achievement-label">Gaming</span>
+            </div>
+            <div class="achievement-item">
+                <span class="achievement-icon">🧠</span>
+                <span class="achievement-label">Psychology</span>
+            </div>
+        </div>
+    </div>
     <div class="stats-grid">
         <div class="stat-item">
-            <span class="stat-number">500+</span>
+            <span class="stat-number">750+</span>
             <span class="stat-label">Members</span>
         </div>
         <div class="stat-item">
@@ -832,34 +849,27 @@
             <span class="stat-label">Vibes</span>
         </div>
     </div>
-
     <div class="server-box">
         <img class="server-icon" src="https://cdn.discordapp.com/icons/1249197403068956712/4be337fb2a8c6dcb7410631d83eba9a8.png">
-
         <div class="server-info">
             <div class="server-title">𝙏𝘼𝙊 • SQD-COMMUNITY</div>
             <div class="server-stats" id="serverStats">Loading...</div>
             <a class="join-btn" href="https://discord.gg/nEytHzam7t" target="_blank">Join Server →</a>
         </div>
     </div>
-
     <div class="extra-box">
         <div class="song-title">Fly Away</div>
         <div class="song-artist">TheFatRat</div>
-
         <div class="audio-slider">
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>
                 <div class="progress-thumb" id="progressThumb"></div>
             </div>
-
             <div class="time-row">
                 <span id="currentTime">0:00</span>
                 <span id="totalTime">0:00</span>
             </div>
-
             <div class="controls-row">
-
                 <!-- Retroceder -->
                 <button class="audio-btn" id="rewindBtn">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -867,7 +877,6 @@
                         <line x1="22" y1="12" x2="2" y2="12"></line>
                     </svg>
                 </button>
-
                 <!-- Play/Pause -->
                 <button class="audio-btn" id="playPauseBtn">
                     <span id="playIcon">
@@ -876,7 +885,6 @@
                         </svg>
                     </span>
                 </button>
-
                 <!-- Adelantar -->
                 <button class="audio-btn" id="forwardBtn">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -884,9 +892,7 @@
                         <line x1="2" y1="12" x2="22" y2="12"></line>
                     </svg>
                 </button>
-
             </div>
-
             <div class="volume-container">
                 <button class="volume-btn" id="volumeBtn">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -900,21 +906,18 @@
             </div>
         </div>
     </div>
-
     <div class="footer">
         <div class="footer-divider"></div>
         Made with 💙 by Risa
         <div class="footer-divider"></div>
     </div>
-
     <script>
         fetch("https://discord.com/api/guilds/1249197403068956712/widget.json")
             .then(r => r.json())
             .then(data => {
                 document.getElementById("serverStats").textContent =
-                    data.presence_count + " Online • 500+ Members";
+                    data.presence_count + " Online • 750+ Members";
             });
-
         const startScreen = document.getElementById("startScreen");
         const audio = document.getElementById("bgAudio");
         const playPauseBtn = document.getElementById("playPauseBtn");
@@ -929,39 +932,32 @@
         const volumeBtn = document.getElementById("volumeBtn");
         const volumeSlider = document.getElementById("volumeSlider");
         const volumeFill = document.getElementById("volumeFill");
-
         let audioReady = false;
-
         const playSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="6 4 20 12 6 20 6 4"></polygon>
         </svg>`;
-
         const pauseSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="8" y1="4" x2="8" y2="20"></line>
             <line x1="16" y1="4" x2="16" y2="20"></line>
         </svg>`;
-
         const volumeOnSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
         </svg>`;
-
         const volumeOffSVG = `
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <line x1="23" y1="9" x2="17" y2="15"></line>
             <line x1="17" y1="9" x2="23" y2="15"></line>
         </svg>`;
-
         function formatTime(sec) {
             const m = Math.floor(sec / 60);
             const s = Math.floor(sec % 60).toString().padStart(2, "0");
             return `${m}:${s}`;
         }
-
         startScreen.addEventListener("click", () => {
             startScreen.style.opacity = "0";
             setTimeout(() => {
@@ -973,11 +969,9 @@
                 playIcon.innerHTML = pauseSVG;
             });
         });
-
         audio.addEventListener("loadedmetadata", () => {
             totalTimeEl.textContent = formatTime(audio.duration);
         });
-
         playPauseBtn.addEventListener("click", () => {
             if (!audioReady) {
                 audio.play().then(() => {
@@ -986,7 +980,6 @@
                 });
                 return;
             }
-
             if (audio.paused) {
                 audio.play();
                 playIcon.innerHTML = pauseSVG;
@@ -995,15 +988,12 @@
                 playIcon.innerHTML = playSVG;
             }
         });
-
         rewindBtn.addEventListener("click", () => {
             audio.currentTime = Math.max(0, audio.currentTime - 5);
         });
-
         forwardBtn.addEventListener("click", () => {
             audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
         });
-
         audio.addEventListener("timeupdate", () => {
             if (!isNaN(audio.duration)) {
                 const progress = (audio.currentTime / audio.duration) * 100;
@@ -1012,7 +1002,6 @@
                 currentTimeEl.textContent = formatTime(audio.currentTime);
             }
         });
-
         progressContainer.addEventListener("click", (e) => {
             if (!isNaN(audio.duration)) {
                 const rect = progressContainer.getBoundingClientRect();
@@ -1021,10 +1010,8 @@
                 audio.currentTime = percent * audio.duration;
             }
         });
-
         // Control de volumen
         audio.volume = 0.7;
-
         volumeBtn.addEventListener("click", () => {
             if (audio.volume > 0) {
                 audio.volume = 0;
@@ -1036,7 +1023,6 @@
                 volumeBtn.innerHTML = volumeOnSVG;
             }
         });
-
         volumeSlider.addEventListener("click", (e) => {
             const rect = volumeSlider.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
@@ -1051,6 +1037,5 @@
             }
         });
     </script>
-
 </body>
 </html>
