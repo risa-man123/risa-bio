@@ -336,45 +336,6 @@
             font-size: 0.85rem;
             opacity: 0.9;
         }
-        /* Grid de estadísticas */
-        .stats-grid {
-            margin-top: 20px;
-            padding: 20px;
-            width: 100%;
-            max-width: 440px;
-            border-radius: 18px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            animation: slideUp 1.5s ease forwards;
-            opacity: 0;
-            animation-delay: 0.2s;
-        }
-        .stat-item {
-            text-align: center;
-            padding: 15px;
-            background: rgba(0, 255, 255, 0.08);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-        .stat-item:hover {
-            background: rgba(0, 255, 255, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.25);
-        }
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            display: block;
-            margin-bottom: 5px;
-        }
-        .stat-label {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
         .icon-row {
             display: flex;
             justify-content: center;
@@ -435,48 +396,78 @@
         .server-box {
             margin-top: 30px;
             border-radius: 18px;
-            padding: 22px;
+            padding: 25px;
             width: 100%;
             max-width: 440px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 16px;
-            justify-content: center;
             animation: slideUp 1.6s ease forwards;
             opacity: 0;
             animation-delay: 0.3s;
         }
         .server-icon {
-            width: 65px;
-            height: 65px;
+            width: 80px;
+            height: 80px;
             border-radius: 16px;
             object-fit: cover;
             border: 2px solid rgba(255,255,255,0.35);
             box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
             transition: all 0.3s ease;
+            margin-bottom: 15px;
         }
         .server-box:hover .server-icon {
             transform: rotate(5deg) scale(1.05);
             box-shadow: 0 6px 25px rgba(0, 255, 255, 0.5);
         }
         .server-info { 
-            flex: 1; 
+            width: 100%;
+            text-align: center;
+            margin-bottom: 18px;
         }
         .server-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #00ffff;
             text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
         }
         .server-stats {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             opacity: 0.85;
+            margin-bottom: 15px;
+        }
+        .server-tags-title {
+            font-size: 1.05rem;
+            font-weight: 600;
             margin-bottom: 12px;
+            color: #00ffff;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+        }
+        .server-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            width: 100%;
+        }
+        .server-tag {
+            padding: 6px 14px;
+            background: rgba(0, 255, 255, 0.12);
+            border: 1px solid rgba(0, 255, 255, 0.25);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .server-tag:hover {
+            background: rgba(0, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 255, 255, 0.3);
         }
         .join-btn {
             display: inline-block;
-            padding: 11px 20px;
+            padding: 11px 24px;
             background: rgba(0,255,255,0.22);
             border: 1px solid rgba(255,255,255,0.5);
             border-radius: 12px;
@@ -738,11 +729,16 @@
         @media (max-width: 480px) {
             h1 { font-size: 1.7rem; }
             .card { padding: 25px; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .stat-item { padding: 12px; }
             .controls-row { gap: 20px; }
             .achievement-grid { 
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .server-tags {
+                gap: 6px;
+            }
+            .server-tag {
+                font-size: 0.8rem;
+                padding: 5px 12px;
             }
             .icon-row { gap: 12px; }
         }
@@ -790,7 +786,8 @@
     <div class="bio-extended">
         <div class="bio-title">About Me</div>
         <div class="bio-text">
-            I'm Risa. I'm a tech enthusiast and I love doing things online. I'm very curious and I always want to learning anything I am interested in.
+            Community builder, content creator, and tech enthusiast. 
+            I love connecting people and creating amazing experiences in the digital world.
         </div>
         <div class="interests">
             <span class="interest-tag">🎮 Gaming</span>
@@ -816,9 +813,7 @@
                 <span class="achievement-label">Programming</span>
             </div>
             <div class="achievement-item">
-                <span class="achievement-icon">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6295/6295417.png" alt="Chess">
-                </span>
+                <span class="achievement-icon">♟️</span>
                 <span class="achievement-label">Chess</span>
             </div>
             <div class="achievement-item">
@@ -835,26 +830,22 @@
             </div>
         </div>
     </div>
-    <div class="stats-grid">
-        <div class="stat-item">
-            <span class="stat-number">750+</span>
-            <span class="stat-label">Members</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">24/7</span>
-            <span class="stat-label">Active</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Vibes</span>
-        </div>
-    </div>
     <div class="server-box">
         <img class="server-icon" src="https://cdn.discordapp.com/icons/1249197403068956712/4be337fb2a8c6dcb7410631d83eba9a8.png">
+        
         <div class="server-info">
             <div class="server-title">𝙏𝘼𝙊 • SQD-COMMUNITY</div>
-            <div class="server-stats" id="serverStats">Loading...</div>
-            <a class="join-btn" href="https://discord.gg/nEytHzam7t" target="_blank">Join Server →</a>
+            <div class="server-stats" id="serverStats">750+ Members • Loading Online...</div>
+            <a class="join-btn" href="https://discord.gg/nEytHzam7t" target="_blank">Join Server</a>
+        </div>
+        
+        <div class="server-tags-title">Editing Community</div>
+        <div class="server-tags">
+            <span class="server-tag">After Effects</span>
+            <span class="server-tag">Alight Motion</span>
+            <span class="server-tag">CapCut</span>
+            <span class="server-tag">Premiere Pro</span>
+            <span class="server-tag">DaVinci Resolve</span>
         </div>
     </div>
     <div class="extra-box">
@@ -916,7 +907,10 @@
             .then(r => r.json())
             .then(data => {
                 document.getElementById("serverStats").textContent =
-                    data.presence_count + " Online • 750+ Members";
+                    "750+ Members • " + data.presence_count + " Online";
+            })
+            .catch(() => {
+                document.getElementById("serverStats").textContent = "750+ Members";
             });
         const startScreen = document.getElementById("startScreen");
         const audio = document.getElementById("bgAudio");
